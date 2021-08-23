@@ -58,6 +58,11 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.version}</version>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${springboot.dependencies.version}</version>
@@ -97,7 +102,10 @@
         <profile>
             <id>checks</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>farao.checks.skip</name>
+                    <value>!true</value>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -120,20 +128,28 @@
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <version>${maven.jacoco.version}</version>
                         <executions>
                             <execution>
-                                <id>pre-unit-tests</id>
+                                <id>prepare-jacoco-agent</id>
+                                <phase>test-compile</phase>
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
                             </execution>
                             <execution>
-                                <id>post-unit-test</id>
-                                <phase>test</phase>
+                                <id>generate-jacoco-report</id>
+                                <phase>verify</phase>
                                 <goals>
                                     <goal>report</goal>
                                 </goals>
