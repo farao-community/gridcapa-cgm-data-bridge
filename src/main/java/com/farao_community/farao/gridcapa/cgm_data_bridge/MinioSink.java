@@ -28,6 +28,7 @@ import org.springframework.messaging.MessageHandler;
 @Configuration
 public class MinioSink {
     public static final String AWS_CLIENT_SIGNER_TYPE = "AWSS3V4SignerType";
+
     @Value("${cgm-data-bridge.sinks.minio.url}")
     private String url;
     @Value("${cgm-data-bridge.sinks.minio.access-key}")
