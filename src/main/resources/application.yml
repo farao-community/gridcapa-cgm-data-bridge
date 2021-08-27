@@ -1,0 +1,16 @@
+cgm-data-bridge:
+  sources:
+    ftp:
+      host: ${CGM_SOURCE_FTP_HOST:localhost}
+      port: ${CGM_SOURCE_FTP_PORT:21}
+      username: ${CGM_SOURCE_FTP_USERNAME:gridcapa}
+      password: ${CGM_SOURCE_FTP_PASSWORD:gridcapa}
+      base-directory: ${CGM_SOURCE_FTP_BASE_DIRECTORY:/data/gridcapa/cse/d2cc/cgms}
+      polling-delay-in-ms: ${CGM_SOURCE_FTP_POLLING_DELAY:5000}
+  sinks:
+    minio:
+      url: ${CGM_SINK_MINIO_URL:http://localhost:9000}
+      access-key: ${CGM_SINK_MINIO_ACCESS_KEY:gridcapa}
+      secret-key: ${CGM_SINK_MINIO_SECRET_KEY:gridcapa}
+      bucket: ${CGM_SINK_MINIO_BUCKET:gridcapa}
+      base-directory: ${CGM_SINK_MINIO_BASE_DIRECTORY:/CGMs}

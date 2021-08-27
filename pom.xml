@@ -45,6 +45,8 @@
         <maven.jacoco.version>0.8.5</maven.jacoco.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <springboot.dependencies.version>2.3.6.RELEASE</springboot.dependencies.version>
+        <spring.integration.aws.version>2.4.0</spring.integration.aws.version>
+        <spring.integration.zip.version>1.0.3.RELEASE</spring.integration.zip.version>
     </properties>
 
     <build>
@@ -179,6 +181,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-aws</artifactId>
+            <version>${spring.integration.aws.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-ftp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-zip</artifactId>
+            <version>${spring.integration.zip.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
