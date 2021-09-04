@@ -40,8 +40,7 @@ public class CgmMetadataProvider implements MetadataProvider {
         Pattern pattern = Pattern.compile(UCTE_FILE_NAME_REGEX);
         Matcher matcher = pattern.matcher(filename);
         if (matcher.matches()) {
-            String datetimeString = matcher.group("datetime");
-            return LocalDateTime.parse(datetimeString, DateTimeFormatter.ofPattern("yyyyMMdd_HHmm")).toString();
+            return LocalDateTime.parse(matcher.group("datetime"), DateTimeFormatter.ofPattern("yyyyMMdd_HHmm")).toString();
         } else {
             return "";
         }
