@@ -1,4 +1,5 @@
 cgm-data-bridge:
+  target-process: ${CGM_TARGET_PROCESS:cse-d2cc}
   sources:
     ftp:
       host: ${CGM_SOURCE_FTP_HOST:localhost}

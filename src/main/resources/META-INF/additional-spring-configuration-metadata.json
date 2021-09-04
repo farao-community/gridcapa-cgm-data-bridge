@@ -1,6 +1,11 @@
 {
   "properties": [
     {
+      "name": "cgm-data-bridge.target-process",
+      "type": "java.lang.String",
+      "description": "Target process to be added as CGM files metadata."
+    },
+    {
       "name": "cgm-data-bridge.sources.ftp.host",
       "type": "java.lang.String",
       "description": "Host of CGM FTP archives source."

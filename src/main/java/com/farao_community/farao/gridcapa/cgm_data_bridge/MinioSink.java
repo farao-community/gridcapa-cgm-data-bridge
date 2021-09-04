@@ -47,10 +47,11 @@ public class MinioSink {
 
     @Bean
     @ServiceActivator(inputChannel = "cgmFilesChannel")
-    public MessageHandler s3MessageHandler() {
+    public MessageHandler s3MessageHandler(CgmMetadataProvider cgmMetadataProvider) {
         S3MessageHandler s3MessageHandler = new S3MessageHandler(amazonS3(), bucket);
         Expression keyExpression = new SpelExpressionParser().parseExpression("'" + baseDirectory + "/' + headers.file_name");
         s3MessageHandler.setKeyExpression(keyExpression);
+        s3MessageHandler.setUploadMetadataProvider((objectMetadata, message) -> cgmMetadataProvider.populateMetadata(message, objectMetadata.getUserMetadata()));
         return s3MessageHandler;
     }
 
