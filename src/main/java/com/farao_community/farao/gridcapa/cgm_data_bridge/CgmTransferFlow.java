@@ -9,7 +9,9 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.zip.splitter.UnZipResultSplitter;
 import org.springframework.integration.zip.transformer.UnZipTransformer;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -35,11 +37,13 @@ public class CgmTransferFlow {
         return IntegrationFlows.from("cgmArchivesChannel")
                 .<File, Boolean>route(this::isZip, m -> m
                         .subFlowMapping(false, flow -> flow
+                                .transform(Message.class, this::addFileNameHeader)
                                 .channel("cgmFilesChannel")
                         )
                         .subFlowMapping(true, flow -> flow
                                 .transform(new UnZipTransformer())
                                 .split(new UnZipResultSplitter())
+                                .transform(Message.class, this::addFileNameHeader)
                                 .channel("cgmFilesChannel")
                         )
                 )
@@ -48,5 +52,12 @@ public class CgmTransferFlow {
 
     private boolean isZip(File file) {
         return ZipFileDetector.isZip(file);
+    }
+
+    private Message<File> addFileNameHeader(Message<File> message) {
+        String filename = (String) message.getHeaders().get("file_name");
+        return MessageBuilder.fromMessage(message)
+                .setHeader("gridcapa_file_name", filename)
+                .build();
     }
 }
