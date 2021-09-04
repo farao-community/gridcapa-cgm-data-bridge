@@ -19,10 +19,10 @@ import java.util.regex.Pattern;
 @Component
 public class CgmMetadataProvider implements MetadataProvider {
     private static final String UCTE_FILE_NAME_REGEX = "(?<datetime>[0-9]{8}_[0-9]{4})_.*.(uct|UCT)";
-    private static final String GRIDCAPA_PROCESS_METADATA_KEY = "gridcapa_process";
-    private static final String GRIDCAPA_FILE_TYPE_METADATA_KEY = "gridcapa_file_type";
-    private static final String GRIDCAPA_TIMESTAMP_METADATA_KEY = "gridcapa_timestamp";
-    private static final String GRIDCAPA_FILE_FORMAT_METADATA_KEY = "gridcapa_file_format";
+    public static final String GRIDCAPA_PROCESS_METADATA_KEY = "gridcapa_process";
+    public static final String GRIDCAPA_FILE_TYPE_METADATA_KEY = "gridcapa_file_type";
+    public static final String GRIDCAPA_TIMESTAMP_METADATA_KEY = "gridcapa_timestamp";
+    public static final String GRIDCAPA_FILE_FORMAT_METADATA_KEY = "gridcapa_file_format";
 
     @Value("${cgm-data-bridge.target-process}")
     private String targetProcess;
